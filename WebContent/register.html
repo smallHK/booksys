@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
+
+<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+<!-- validatejqueryjquery -->
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
 </head>
 <body>
 <div id="header" class="wrap">
@@ -24,16 +29,16 @@
 			<li class="unpass">2.注册成功</li>
 		</ul>
 	</div>
-	<form method="post" action="register_success.html">
+	<form id="reForm" method="post" action="register_success.html" onsubmit="return false;">
 		<dl>
 			<dt>用 户 名：</dt>
-			<dd><input class="input-text" type="text" name="userName" /><span>当前用户已存在！</span></dd>
+			<dd><input class="input-text" type="text" name="userName" /></dd>
 			<dt>密　　码：</dt>
-			<dd><input class="input-text" type="password" name="passWord" /><span>密码过于简单！</span></dd>
+			<dd><input class="input-text" type="password" name="password" /></dd>
 			<dt>确认密码：</dt>
-			<dd><input class="input-text" type="password" name="rePassWord" /><span>两次密码输入不一致！</span></dd>
+			<dd><input class="input-text" type="password" name="rePassWord" /></dd>
 			<dt>Email地址：</dt>
-			<dd><input class="input-text" type="text" name="email" /><span>邮箱输入不正确！</span></dd>
+			<dd><input class="input-text" type="text" name="email" /></dd>
 			<dt></dt>
 			<dd class="button"><input class="input-reg" type="submit" name="register" value="" /></dd>
 		</dl>
@@ -42,5 +47,64 @@
 <div id="footer" class="wrap">
 	XXXXXXXXX &copy; 版权所有
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		
+		$("#reForm").validate({
+			
+			submitHandler:function(){
+				$.ajax({
+					type:"post",
+					url:"register",
+					data:$("reForm").serialize(),
+					dataType:"json",
+					success:function(data){
+						if(data.code == 1){
+							window.location.href = "login.html";
+						}else{
+							alert(data.msg);
+						}
+					}
+				})
+			}
+			rules: {
+				userName: "required",
+				password: {
+					required: true,
+					minlength: 6
+				},
+				rePassWord: {
+					required: true,
+					minlength: 6,
+					equalTo: "#password"
+				},
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				userName: "用户名必须输入",
+				password: {
+					required: "密码必须输入",
+					minlength: "密码不能少于6位"
+				},
+				rePassWord: {
+					required: "确认密码必须输入",
+					minlength: "密码不能少于6位",
+					equalTo: "两次输入密码不一致"
+				},
+				email: {
+					required: "邮箱必须输入",
+					email: "邮箱格式不对"
+				}
+			},
+			
+		})
+		
+	})
+</script>
+
 </body>
 </html>

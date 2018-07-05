@@ -20,6 +20,9 @@
 		SELECT id, username, password, email, islock FROM t_user WHERE username=#{name} 
 	</select>
 	
+	<select id="add" parameterType="user">
+		INSERT INTO t_user(username,password,email) values(#{userName},#{password},#{email})
+	</select>
 </mapper>
 
 

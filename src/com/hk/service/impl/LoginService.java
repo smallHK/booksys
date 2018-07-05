@@ -28,7 +28,13 @@ public class LoginService implements ILoginService{
 		}
 		
 		
-		User user = userDao.findByName(name);
+		User user;
+		try {
+			user = userDao.findByName(name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
 		if(user == null){
 			throw new RuntimeException("用户名不存在");
 		}else{
@@ -42,6 +48,17 @@ public class LoginService implements ILoginService{
 	@Override
 	public void register(User user) {
 		// TODO Auto-generated method stub
+		
+		if(user == null){
+			throw new RuntimeException("用户信息不能为空");
+		}
+		
+		try {
+			userDao.add(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
 		
 	}
 

@@ -31,6 +31,7 @@
 			<dd><input class="input-text" type="text" name="userName" /></dd>
 			<dt>密　码：</dt>
 			<dd><input class="input-text" type="password" name="passWord" /></dd>
+			<dd><span id="errorinfo" class="error"></span></dd>
 			<dt></dt>
 			<dd class="button"><input class="input-btn" type="submit" name="submit" value="" /><input class="input-reg" type="button" name="register" value="" onclick="window.location='register.html';" /></dd>
 		</dl>
@@ -72,7 +73,8 @@
 						if(data.code == 1){
 							window.location.href = "index.html";
 						}else{
-							alert(data.msg);
+							//alert(data.msg);
+							$("#errorinfo").html(data.msg);
 						}
 					}
 					

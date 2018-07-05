@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hk.entity.User;
 import com.hk.service.ILoginService;
 import com.hk.vo.JsonBean;
 
@@ -34,5 +36,22 @@ public class LoginController {
 		return bean;
 	}
 	
+	
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public @ResponseBody JsonBean register(User user){
+		JsonBean bean = new JsonBean();
+		
+		try {
+			loginService.register(user);
+			bean.setCode(1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			bean.setCode(0);
+			bean.setMsg(e.getMessage());
+		}
+		
+		return bean;
+	}
 	
 }

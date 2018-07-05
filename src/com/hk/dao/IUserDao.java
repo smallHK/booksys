@@ -10,4 +10,5 @@ public interface IUserDao extends IBaseDao<User> {
 	public User findByName(String name);
 	
 	
+	
 }
