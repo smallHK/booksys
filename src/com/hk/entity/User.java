@@ -7,7 +7,18 @@ public class User {
 	private String password;
 	private String email;
 	private Integer isLock;//ÊÇ·ñËø¶¨
+	private String rePassWord;
 	
+	
+	
+	
+
+	public String getRePassWord() {
+		return rePassWord;
+	}
+	public void setRePassWord(String rePassWord) {
+		this.rePassWord = rePassWord;
+	}
 	public Integer getId() {
 		return id;
 	}

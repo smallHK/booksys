@@ -17,6 +17,7 @@
 	<!-- 设置类型的别名 -->
 	<typeAliases>
 		<typeAlias type="com.hk.entity.User" alias="user"/>
+		<typeAlias type="com.hk.entity.Books" alias="books"/>
 		
 	</typeAliases>
 	

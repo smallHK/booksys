@@ -13,4 +13,6 @@ public interface IBaseDao<T> {
 	
 	public List<T> findAll();
 	
+	public int count();//²éÑ¯¼ÇÂ¼Êý
+	
 }

@@ -11,6 +11,7 @@
 		<id property="id" column="id"/>
 		<result property="userName" column="username"/>
 		<result property="password" column="password"/>
+		<result property="rePassWord" column="rePassWord"/>
 		<result property="email" column="email"/>
 		<result property="isLock" column="islock"/>
 		

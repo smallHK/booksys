@@ -53,6 +53,11 @@ public class LoginService implements ILoginService{
 			throw new RuntimeException("用户信息不能为空");
 		}
 		
+		
+		if(!user.getPassword().equals(user.getRePassWord())){
+			throw new RuntimeException("两次密码不一致");
+		}
+		
 		try {
 			userDao.add(user);
 		} catch (Exception e) {
@@ -62,6 +67,21 @@ public class LoginService implements ILoginService{
 		
 	}
 
-	
+	public boolean userIsExist(String name){
+		
+		try {
+			User user = userDao.findByName(name);
+			if(user == null){
+				return false;
+			}else{
+				return true;
+			}
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+		
+	}
 	
 }

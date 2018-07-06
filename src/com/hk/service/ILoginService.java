@@ -11,4 +11,6 @@ public interface ILoginService {
 	public void register(User user);
 	
 	
+	public boolean userIsExist(String name);
+	
 }
