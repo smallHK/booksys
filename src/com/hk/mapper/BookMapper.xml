@@ -17,6 +17,15 @@
 		select id, bookname, price, stock, img from t_book limit #{index},#{size}
 	</select>
 	
+	<select id="findByIds" parameterType="list" resultMap="bookMapper">
+		
+		select id, bookname, price, stock, img from t_book where id in 
+		<foreach collection="list" item="i" open="("  close=")" separator=",">
+			#{i}
+		</foreach>
+		
+	</select>
+	
 	<select id="count" resultType="int">
 		select count(1) from t_book
 	</select>

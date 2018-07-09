@@ -1,5 +1,9 @@
 package com.hk.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +23,19 @@ public class LoginController {
 	private ILoginService loginService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public @ResponseBody JsonBean login(@RequestParam("userName")String username, @RequestParam("passWord")String password){
+	public @ResponseBody JsonBean login(@RequestParam("userName")String username, @RequestParam("passWord")String password, HttpSession session, HttpServletResponse response){
 		
 		JsonBean bean = new JsonBean();
 
 		try {
 			loginService.login(username, password);
+			//登录成功，将用户名存放到session对象里
+			session.setAttribute("loginname", username);
+			String sessionId = session.getId();
+			Cookie cookie = new Cookie("JSESSIONID", sessionId);
+			cookie.setMaxAge(1800);
+			response.addCookie(cookie);
+			
 			bean.setCode(1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

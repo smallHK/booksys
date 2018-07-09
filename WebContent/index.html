@@ -27,7 +27,7 @@
 </div>
 <div id="content" class="wrap">
 	<div class="list bookList">
-		<form method="post" name="shoping" action="shopping.html">
+		<form id="cartForm" method="post" name="shoping" action="shopping.html" onsubmit="return false;">
 			<table>
 				<tr class="title">
 					<th class="checker"></th>
@@ -52,7 +52,7 @@
 				<a href="#">尾页</a>
 				<a href="#">&gt;</a> -->
 			</div>
-			<div class="button"><input class="input-btn" type="submit" name="submit" value="" /></div>
+			<div class="button"><input id="cartId" class="input-btn" type="submit" name="submit" value="" /></div>
 		</form>
 	</div>
 </div>
@@ -142,6 +142,33 @@ function loadData(page){
 		
 		$(".page-spliter").append($(html));
 	}
+	
+</script>
+
+<script type="text/javascript">
+	
+	$("#cartForm").submit(function(){
+		
+		/*if($("input[type='checkbox']:checked").length < 1){*/
+		if($(":checkbox:checked").length < 1){ 
+			alert("没有选中任何数据，无法添加到购物车");
+			return;
+		} 
+		
+		
+		
+		$.ajax({
+			type:"post",
+			url:"carts",
+			data:$("#cartForm").serialize(),
+			dataType:"json",
+			success:function(data){
+				if(data.code == 1){
+					window.location.href = "shopping.html";
+				}
+			}
+		})
+	})
 	
 </script>
 

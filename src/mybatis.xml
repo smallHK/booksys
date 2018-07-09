@@ -18,6 +18,9 @@
 	<typeAliases>
 		<typeAlias type="com.hk.entity.User" alias="user"/>
 		<typeAlias type="com.hk.entity.Books" alias="books"/>
+		<typeAlias type="com.hk.entity.Orders" alias="orders"/>
+		<typeAlias type="com.hk.entity.OrderItem" alias="item"/>
+		
 		
 	</typeAliases>
 	
